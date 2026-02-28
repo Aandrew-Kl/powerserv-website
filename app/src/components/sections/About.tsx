@@ -1,5 +1,7 @@
 import { Shield, Target, Lightbulb, Award } from 'lucide-react';
 
+const base = import.meta.env.BASE_URL;
+
 const highlights = [
   {
     icon: Shield,
@@ -33,7 +35,7 @@ export default function About() {
           <div className="reveal-left relative">
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="/assets/asset_7.jpg"
+                src={`${base}assets/asset_7.jpg`}
                 alt="PowerServ engineering team at work"
                 className="w-full h-[400px] lg:h-[500px] object-cover"
                 loading="lazy"

@@ -1,9 +1,11 @@
+const base = import.meta.env.BASE_URL;
+
 const partners = [
-  { name: 'Intercon', image: '/assets/partner-intercon-gen.png' },
-  { name: 'Megatechnica', image: '/assets/partner-megatechnica.png' },
-  { name: 'FEAC Engineering', image: '/assets/partner-feac-gen.png' },
-  { name: 'Xanthis S.A.', image: '/assets/partner-xanthis.png' },
-  { name: 'Tsaprounis', image: '/assets/partner-tsaprounis.png' },
+  { name: 'Intercon', image: `${base}assets/partner-intercon-gen.png` },
+  { name: 'Megatechnica', image: `${base}assets/partner-megatechnica.png` },
+  { name: 'FEAC Engineering', image: `${base}assets/partner-feac-gen.png` },
+  { name: 'Xanthis S.A.', image: `${base}assets/partner-xanthis.png` },
+  { name: 'Tsaprounis', image: `${base}assets/partner-tsaprounis.png` },
 ];
 
 export default function TrustBar() {

@@ -1,12 +1,14 @@
 import { ArrowRight, ChevronDown } from 'lucide-react';
 
+const base = import.meta.env.BASE_URL;
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden" aria-label="Hero">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/assets/hero-bg.jpg)' }}
+        style={{ backgroundImage: `url(${base}assets/hero-bg.jpg)` }}
         aria-hidden="true"
       />
 

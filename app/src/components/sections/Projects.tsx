@@ -1,29 +1,31 @@
 import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
+const base = import.meta.env.BASE_URL;
+
 const projects = [
   {
     name: 'Marine Piping Design',
     category: 'Marine',
-    image: '/assets/asset_3.jpg',
+    image: `${base}assets/asset_3.jpg`,
     description: 'Complete piping system design for commercial and naval vessels, including P&IDs, isometrics, and stress analysis.',
   },
   {
     name: 'Ship Weight Estimation',
     category: 'Marine',
-    image: '/assets/asset_4.jpg',
+    image: `${base}assets/asset_4.jpg`,
     description: 'Precise weight estimation and center-of-gravity calculations for new-build and retrofit marine projects.',
   },
   {
     name: 'Electric Generator Systems',
     category: 'Energy',
-    image: '/assets/asset_5.jpg',
+    image: `${base}assets/asset_5.jpg`,
     description: 'Design and integration of power generation systems for biomass, biodiesel, and industrial applications.',
   },
   {
     name: 'BWTS Installation Projects',
     category: 'Marine',
-    image: '/assets/asset_6.jpg',
+    image: `${base}assets/asset_6.jpg`,
     description: 'Over 60 Ballast Water Treatment System installations — from design and documentation to on-site supervision.',
   },
 ];

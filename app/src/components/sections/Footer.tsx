@@ -24,6 +24,8 @@ const sectorLinks = [
   'Industrial Automation',
 ];
 
+const base = import.meta.env.BASE_URL;
+
 export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -39,7 +41,7 @@ export default function Footer() {
           {/* Column 1: Company */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <img src="/assets/logo.png" alt="" className="h-10 w-auto" aria-hidden="true" />
+              <img src={`${base}assets/logo.png`} alt="" className="h-10 w-auto" aria-hidden="true" />
               <div>
                 <span className="text-lg font-bold text-white block leading-tight">PowerServ</span>
                 <span className="text-[10px] text-[var(--gray-400)] tracking-[0.15em] uppercase">Engineering Solutions</span>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Menu, X, Phone, ArrowRight } from 'lucide-react';
 
+const base = import.meta.env.BASE_URL;
+
 const navLinks = [
   { name: 'Home', href: '#' },
   { name: 'About', href: '#about' },
@@ -42,7 +44,7 @@ export default function Navigation() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group" aria-label="PowerServ - Home">
             <img
-              src="/assets/logo.png"
+              src={`${base}assets/logo.png`}
               alt=""
               className="h-10 w-auto"
               aria-hidden="true"
@@ -125,7 +127,7 @@ export default function Navigation() {
       >
         <div className="flex items-center justify-between px-5 py-5">
           <a href="#" className="flex items-center gap-3" onClick={() => setIsMobileMenuOpen(false)}>
-            <img src="/assets/logo.png" alt="" className="h-10 w-auto" />
+            <img src={`${base}assets/logo.png`} alt="" className="h-10 w-auto" />
             <span className="text-lg font-bold text-white">PowerServ</span>
           </a>
           <button
