@@ -10,25 +10,15 @@ const partners = [
 
 export default function TrustBar() {
   return (
-    <section className="py-10 md:py-14 bg-[var(--gray-50)] border-y border-[var(--gray-100)]" aria-label="Trusted partners">
+    <section className="py-8 md:py-10 bg-white border-b border-[var(--gray-100)]" aria-label="Trusted partners">
       <div className="container-wide">
-        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-          <p className="text-overline text-[var(--gray-400)] whitespace-nowrap">
-            Trusted By
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16 w-full">
-            {partners.map((partner) => (
-              <div
-                key={partner.name}
-                className="partner-logo flex items-center justify-center"
-                title={partner.name}
-              >
-                <img
-                  src={partner.image}
-                  alt={partner.name}
-                  className="h-8 md:h-10 w-auto max-w-[120px] object-contain"
-                  loading="lazy"
-                />
+        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+          <p className="text-overline text-[var(--gray-400)] whitespace-nowrap shrink-0">Trusted By</p>
+          <div className="w-px h-4 bg-[var(--gray-200)] hidden md:block" />
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-10 lg:gap-14 w-full">
+            {partners.map((p) => (
+              <div key={p.name} className="partner-logo flex items-center justify-center" title={p.name}>
+                <img src={p.image} alt={p.name} className="h-7 md:h-9 w-auto max-w-[110px] object-contain" loading="lazy" />
               </div>
             ))}
           </div>

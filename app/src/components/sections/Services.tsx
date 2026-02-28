@@ -12,37 +12,37 @@ const services = [
     icon: FileText,
     title: 'Budget Estimation & Feasibility',
     description:
-      'Comprehensive cost analysis and feasibility studies tailored to project scope. We evaluate technical viability, financial parameters, and risk factors to support informed decision-making.',
+      'Comprehensive cost analysis and feasibility studies tailored to project scope. We evaluate technical viability, financial parameters, and risk factors.',
   },
   {
     icon: PenTool,
     title: 'Engineering Studies',
     description:
-      'In-house capability for shipbuilding, mechanical, electrical, and automation studies. Our engineers deliver detailed technical documentation aligned with international standards.',
+      'In-house capability for shipbuilding, mechanical, electrical, and automation studies. Detailed technical documentation aligned with international standards.',
   },
   {
     icon: ClipboardList,
     title: 'Technical Design',
     description:
-      'Production of layouts, isometric drawings, and 3D models with complete materials take-off lists, datasheets, and specifications — ready for fabrication and construction.',
+      'Production of layouts, isometric drawings, and 3D models with complete materials take-off lists, datasheets, and specifications.',
   },
   {
     icon: Users,
     title: 'Consulting & Advisory',
     description:
-      'Strategic engineering consulting backed by decades of field experience. We advise on system optimization, regulatory compliance, and technology selection.',
+      'Strategic engineering consulting backed by decades of field experience. System optimization, regulatory compliance, and technology selection.',
   },
   {
     icon: Clock,
     title: 'Project Scheduling',
     description:
-      'Structured project planning developed in collaboration with our clients. We define timelines, milestones, and resource allocation to ensure on-time delivery.',
+      'Structured project planning with defined timelines, milestones, and resource allocation developed in collaboration with clients.',
   },
   {
     icon: Share2,
     title: 'Design Review & Coordination',
     description:
-      'Continuous client engagement throughout the design process. Real-time reviews, iterative feedback loops, and transparent communication at every stage.',
+      'Continuous client engagement throughout the design process. Real-time reviews, iterative feedback, and transparent communication.',
   },
 ];
 
@@ -51,11 +51,10 @@ export default function Services() {
     <section id="services" className="section-padding bg-[var(--gray-50)]" aria-labelledby="services-heading">
       <div className="container-wide">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 reveal">
-          <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="max-w-2xl mb-14 reveal">
+          <div className="flex items-center gap-3 mb-4">
             <div className="section-divider" />
-            <span className="text-overline text-[var(--gold)]">What We Do</span>
-            <div className="section-divider" />
+            <span className="text-overline text-[var(--teal)]">What We Do</span>
           </div>
           <h2 id="services-heading" className="text-h2 text-[var(--navy)] mb-4">
             Comprehensive Engineering Services
@@ -66,26 +65,26 @@ export default function Services() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((service, i) => (
             <div
               key={service.title}
-              className={`reveal delay-${(i % 3 + 1) * 100} service-card group bg-white rounded-xl p-7 border border-[var(--gray-100)] hover:border-[var(--gold)]/30`}
+              className={`reveal delay-${(i % 3 + 1) * 100} service-card group bg-white rounded-xl p-7 border border-[var(--gray-100)]`}
             >
               {/* Icon */}
-              <div className="w-14 h-14 rounded-xl bg-[var(--navy)]/5 flex items-center justify-center mb-5 group-hover:bg-[var(--gold)] transition-colors duration-400">
-                <service.icon className="w-6 h-6 text-[var(--navy)] group-hover:text-white transition-colors duration-400" />
+              <div className="w-12 h-12 rounded-lg bg-[var(--navy)]/[0.04] flex items-center justify-center mb-5 group-hover:bg-[var(--navy)] transition-colors duration-400">
+                <service.icon className="w-5 h-5 text-[var(--navy)]/50 group-hover:text-white transition-colors duration-400" />
               </div>
 
               {/* Content */}
-              <h3 className="text-h4 text-[var(--navy)] mb-3">{service.title}</h3>
+              <h3 className="text-[15px] font-semibold text-[var(--navy)] mb-2.5 leading-tight">{service.title}</h3>
               <p className="text-body-sm text-[var(--text-secondary)] leading-relaxed">
                 {service.description}
               </p>
 
-              {/* Bottom accent line */}
-              <div className="mt-6 pt-4 border-t border-[var(--gray-100)] group-hover:border-[var(--gold)]/20 transition-colors duration-400">
-                <span className="text-xs font-semibold text-[var(--gold)] opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center gap-1">
+              {/* Bottom accent */}
+              <div className="mt-5 pt-4 border-t border-[var(--gray-100)]">
+                <span className="text-[11px] font-semibold text-[var(--teal)] opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center gap-1 uppercase tracking-wider">
                   Learn more
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
