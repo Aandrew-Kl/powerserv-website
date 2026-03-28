@@ -43,8 +43,8 @@ export default function Footer() {
             <div className="flex items-center gap-2.5 mb-6">
               <img src={`${base}assets/logo.png`} alt="" className="h-9 w-auto" aria-hidden="true" />
               <div className="leading-none">
-                <span className="text-[15px] font-bold text-white block">PowerServ</span>
-                <span className="text-[9px] text-[var(--gray-500)] tracking-[0.15em] uppercase">Engineering Solutions</span>
+                <span className="text-[15px] font-bold text-white block tracking-[0.05em] uppercase">PowerServ</span>
+                <span className="text-[8px] text-[var(--gray-500)] tracking-[0.12em] uppercase">Engineering Company</span>
               </div>
             </div>
             <p className="text-sm text-[var(--gray-500)] leading-relaxed mb-6">
