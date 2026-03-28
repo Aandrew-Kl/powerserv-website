@@ -37,7 +37,12 @@ export default function Navigation() {
       <div className="container-wide">
         <nav className="flex items-center justify-between" aria-label="Main navigation">
           <a href="#" className="flex items-center gap-2.5" aria-label="PowerServ - Home">
-            <img src={`${base}assets/logo.png`} alt="" className="h-9 w-auto" aria-hidden="true" />
+            <img
+              src={`${base}assets/${isScrolled ? 'logo-dark' : 'logo-light'}.png`}
+              alt=""
+              className="h-9 w-auto transition-opacity duration-300"
+              aria-hidden="true"
+            />
             <div className="leading-none">
               <span className={`text-[15px] font-bold block tracking-[0.05em] uppercase transition-colors duration-300 ${
                 isScrolled ? 'text-[var(--navy)]' : 'text-white'
@@ -103,7 +108,7 @@ export default function Navigation() {
       >
         <div className="flex items-center justify-between px-6 py-5">
           <a href="#" className="flex items-center gap-2.5" onClick={() => setIsMobileMenuOpen(false)}>
-            <img src={`${base}assets/logo.png`} alt="" className="h-9 w-auto" />
+            <img src={`${base}assets/logo-light.png`} alt="" className="h-9 w-auto" />
             <span className="text-[15px] font-bold text-white tracking-[0.05em] uppercase">PowerServ</span>
           </a>
           <button onClick={() => setIsMobileMenuOpen(false)} className="p-2" aria-label="Close menu">
