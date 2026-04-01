@@ -5,6 +5,7 @@ import {
   Globe,
   Linkedin,
   ArrowUp,
+  FileCheck,
 } from 'lucide-react';
 
 const serviceLinks = [
@@ -118,6 +119,12 @@ export default function Footer() {
                 <Globe className="w-3.5 h-3.5 text-[var(--teal)] flex-shrink-0" />
                 <a href="https://www.powerserv.gr" className="text-[13px] text-[var(--gray-500)] hover:text-white transition-colors">
                   www.powerserv.gr
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <FileCheck className="w-3.5 h-3.5 text-[var(--teal)] flex-shrink-0" />
+                <a href="https://publicity.businessportal.gr/company/129532901000" target="_blank" rel="noopener noreferrer" className="text-[13px] text-[var(--gray-500)] hover:text-white transition-colors">
+                  ΓΕΜΗ Registry
                 </a>
               </li>
             </ul>

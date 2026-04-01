@@ -1,4 +1,5 @@
 import { Shield, Target, Lightbulb, Award } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const base = import.meta.env.BASE_URL;
 
@@ -67,9 +68,14 @@ export default function About() {
             <p className="text-body text-[var(--text-secondary)] mb-8">
               We combine deep technical expertise with a hands-on approach. Our team handles the full spectrum of engineering services — from initial feasibility studies and detailed design to project management and on-site supervision.
             </p>
-            <a href="#services" className="btn btn-md btn-secondary">
-              View Our Services
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a href="#services" className="btn btn-md btn-secondary">
+                View Our Services
+              </a>
+              <Link to="/team" className="btn btn-md btn-outline-dark">
+                Meet Our Team
+              </Link>
+            </div>
           </div>
         </div>
 

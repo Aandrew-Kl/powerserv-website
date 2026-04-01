@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Navigation from './components/sections/Navigation';
 import Hero from './components/sections/Hero';
@@ -10,8 +11,30 @@ import Projects from './components/sections/Projects';
 import Stats from './components/sections/Stats';
 import CTA from './components/sections/CTA';
 import Footer from './components/sections/Footer';
+import Team from './components/sections/Team';
+
+function HomePage() {
+  return (
+    <>
+      <Hero />
+      <TrustBar />
+      <About />
+      <Services />
+      <Process />
+      <Projects />
+      <Stats />
+      <CTA />
+    </>
+  );
+}
 
 function App() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   useEffect(() => {
     const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
 
@@ -29,20 +52,16 @@ function App() {
     revealElements.forEach((el) => revealObserver.observe(el));
 
     return () => revealObserver.disconnect();
-  }, []);
+  }, [pathname]);
 
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
       <main>
-        <Hero />
-        <TrustBar />
-        <About />
-        <Services />
-        <Process />
-        <Projects />
-        <Stats />
-        <CTA />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/team" element={<Team />} />
+        </Routes>
       </main>
       <Footer />
     </div>
