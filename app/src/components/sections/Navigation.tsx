@@ -35,7 +35,7 @@ export default function Navigation() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         solid
           ? 'bg-white/[0.97] backdrop-blur-xl shadow-[0_1px_0_rgba(0,0,0,0.06)] py-2.5'
-          : 'bg-transparent py-5'
+          : 'bg-white/[0.85] backdrop-blur-xl py-4'
       }`}
       role="banner"
     >
@@ -45,9 +45,7 @@ export default function Navigation() {
             <img
               src={`${base}assets/logo-full.png`}
               alt="PowerServ Engineering Company"
-              className={`h-10 w-auto transition-all duration-300 ${
-                solid ? '' : 'brightness-0 invert'
-              }`}
+              className="h-14 w-auto transition-all duration-300"
             />
           </Link>
 
@@ -57,22 +55,14 @@ export default function Navigation() {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className={`nav-link px-4 py-2 text-[13px] font-medium transition-colors duration-300 ${
-                    solid
-                      ? 'text-[var(--gray-600)] hover:text-[var(--navy)]'
-                      : 'text-white/75 hover:text-white'
-                  }`}
+                  className="nav-link px-4 py-2 text-[13px] font-medium transition-colors duration-300 text-[var(--gray-600)] hover:text-[var(--navy)]"
                 >{link.name}</Link>
               ) : (
                 <a
                   key={link.name}
                   href={isHome ? link.href : `/#${link.href.slice(1)}`}
                   onClick={!isHome ? () => { window.location.hash = ''; window.location.hash = `#/${link.href.slice(1)}`; } : undefined}
-                  className={`nav-link px-4 py-2 text-[13px] font-medium transition-colors duration-300 ${
-                    solid
-                      ? 'text-[var(--gray-600)] hover:text-[var(--navy)]'
-                      : 'text-white/75 hover:text-white'
-                  }`}
+                  className="nav-link px-4 py-2 text-[13px] font-medium transition-colors duration-300 text-[var(--gray-600)] hover:text-[var(--navy)]"
                 >{link.name}</a>
               )
             )}
@@ -85,9 +75,9 @@ export default function Navigation() {
             aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? (
-              <X className={`w-5 h-5 ${solid ? 'text-[var(--navy)]' : 'text-white'}`} />
+              <X className="w-5 h-5 text-[var(--navy)]" />
             ) : (
-              <Menu className={`w-5 h-5 ${solid ? 'text-[var(--navy)]' : 'text-white'}`} />
+              <Menu className="w-5 h-5 text-[var(--navy)]" />
             )}
           </button>
         </nav>
@@ -102,7 +92,7 @@ export default function Navigation() {
       >
         <div className="flex items-center justify-between px-6 py-5">
           <Link to="/" className="flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
-            <img src={`${base}assets/logo-full.png`} alt="PowerServ" className="h-10 w-auto brightness-0 invert" />
+            <img src={`${base}assets/logo-full.png`} alt="PowerServ" className="h-14 w-auto brightness-0 invert" />
           </Link>
           <button onClick={() => setIsMobileMenuOpen(false)} className="p-2" aria-label="Close menu">
             <X className="w-5 h-5 text-white" />
