@@ -41,12 +41,8 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Column 1: Company */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2.5 mb-6">
-              <img src={`${base}assets/logo-light.png`} alt="" className="h-11 w-auto" aria-hidden="true" />
-              <div className="leading-none">
-                <span className="text-[18px] font-bold text-white block tracking-[0.05em] uppercase">PowerServ</span>
-                <span className="text-[9px] text-[var(--gray-500)] tracking-[0.12em] uppercase">Engineering Company</span>
-              </div>
+            <div className="mb-6">
+              <img src={`${base}assets/logo-full.png`} alt="PowerServ Engineering Company" className="h-10 w-auto brightness-0 invert" />
             </div>
             <p className="text-sm text-[var(--gray-500)] leading-relaxed mb-6">
               Integrated engineering solutions for the marine, energy, and industrial sectors. From concept to commissioning.

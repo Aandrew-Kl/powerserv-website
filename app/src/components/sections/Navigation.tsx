@@ -41,21 +41,14 @@ export default function Navigation() {
     >
       <div className="container-wide">
         <nav className="flex items-center justify-between" aria-label="Main navigation">
-          <Link to="/" className="flex items-center gap-2.5" aria-label="PowerServ - Home">
+          <Link to="/" className="flex items-center" aria-label="PowerServ - Home">
             <img
-              src={`${base}assets/${solid ? 'logo-dark' : 'logo-light'}.png`}
-              alt=""
-              className="h-11 w-auto transition-opacity duration-300"
-              aria-hidden="true"
+              src={`${base}assets/logo-full.png`}
+              alt="PowerServ Engineering Company"
+              className={`h-10 w-auto transition-all duration-300 ${
+                solid ? '' : 'brightness-0 invert'
+              }`}
             />
-            <div className="leading-none">
-              <span className={`text-[18px] font-bold block tracking-[0.05em] uppercase transition-colors duration-300 ${
-                solid ? 'text-[var(--navy)]' : 'text-white'
-              }`}>PowerServ</span>
-              <span className={`text-[9px] font-semibold tracking-[0.12em] uppercase transition-colors duration-300 ${
-                solid ? 'text-[var(--gray-400)]' : 'text-white/50'
-              }`}>Engineering Company</span>
-            </div>
           </Link>
 
           <div className="hidden lg:flex items-center gap-0.5">
@@ -125,9 +118,8 @@ export default function Navigation() {
         style={{ zIndex: 100 }}
       >
         <div className="flex items-center justify-between px-6 py-5">
-          <Link to="/" className="flex items-center gap-2.5" onClick={() => setIsMobileMenuOpen(false)}>
-            <img src={`${base}assets/logo-light.png`} alt="" className="h-11 w-auto" />
-            <span className="text-[18px] font-bold text-white tracking-[0.05em] uppercase">PowerServ</span>
+          <Link to="/" className="flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
+            <img src={`${base}assets/logo-full.png`} alt="PowerServ" className="h-10 w-auto brightness-0 invert" />
           </Link>
           <button onClick={() => setIsMobileMenuOpen(false)} className="p-2" aria-label="Close menu">
             <X className="w-5 h-5 text-white" />
