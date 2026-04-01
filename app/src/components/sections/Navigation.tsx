@@ -31,93 +31,92 @@ export default function Navigation() {
   }, [isMobileMenuOpen]);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        solid
-          ? 'bg-white/[0.97] backdrop-blur-xl shadow-[0_1px_0_rgba(0,0,0,0.06)] py-2.5'
-          : 'bg-white/[0.85] backdrop-blur-xl py-4'
-      }`}
-      role="banner"
-    >
-      <div className="container-wide">
-        <nav className="flex items-center justify-between" aria-label="Main navigation">
-          <Link to="/" className="flex items-center" aria-label="PowerServ - Home">
-            <img
-              src={`${base}assets/logo-full.png`}
-              alt="PowerServ Engineering Company"
-              className="h-14 w-auto transition-all duration-300"
-            />
-          </Link>
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          solid
+            ? 'bg-white/[0.97] backdrop-blur-xl shadow-[0_1px_0_rgba(0,0,0,0.06)] py-2.5'
+            : 'bg-white/[0.85] backdrop-blur-xl py-4'
+        }`}
+        role="banner"
+      >
+        <div className="container-wide">
+          <nav className="flex items-center justify-between" aria-label="Main navigation">
+            <Link to="/" className="flex items-center" aria-label="PowerServ - Home">
+              <img
+                src={`${base}assets/logo-full.png`}
+                alt="PowerServ Engineering Company"
+                className="h-14 w-auto transition-all duration-300"
+              />
+            </Link>
 
-          <div className="hidden lg:flex items-center gap-0.5">
+            <div className="hidden lg:flex items-center gap-0.5">
+              {navLinks.map((link) =>
+                link.isRoute ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="nav-link px-4 py-2 text-[13px] font-medium transition-colors duration-300 text-[var(--gray-600)] hover:text-[var(--navy)]"
+                  >{link.name}</Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={isHome ? link.href : `/#${link.href.slice(1)}`}
+                    onClick={!isHome ? () => { window.location.hash = ''; window.location.hash = `#/${link.href.slice(1)}`; } : undefined}
+                    className="nav-link px-4 py-2 text-[13px] font-medium transition-colors duration-300 text-[var(--gray-600)] hover:text-[var(--navy)]"
+                  >{link.name}</a>
+                )
+              )}
+            </div>
+
+            <button
+              className="lg:hidden p-2 -mr-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-5 h-5 text-[var(--navy)]" />
+              ) : (
+                <Menu className="w-5 h-5 text-[var(--navy)]" />
+              )}
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      {/* Mobile overlay - outside header to avoid stacking context issues */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-[999] bg-[#0d1b2a]">
+          <div className="flex items-center justify-between px-6 py-4 bg-white">
+            <Link to="/" className="flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
+              <img src={`${base}assets/logo-full.png`} alt="PowerServ" className="h-14 w-auto" />
+            </Link>
+            <button onClick={() => setIsMobileMenuOpen(false)} className="p-2" aria-label="Close menu">
+              <X className="w-5 h-5 text-[var(--navy)]" />
+            </button>
+          </div>
+          <div className="flex flex-col px-6 pt-10">
             {navLinks.map((link) =>
               link.isRoute ? (
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="nav-link px-4 py-2 text-[13px] font-medium transition-colors duration-300 text-[var(--gray-600)] hover:text-[var(--navy)]"
+                  className="text-xl font-semibold text-white/80 hover:text-white py-4 border-b border-white/[0.06] transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >{link.name}</Link>
               ) : (
                 <a
                   key={link.name}
-                  href={isHome ? link.href : `/#${link.href.slice(1)}`}
-                  onClick={!isHome ? () => { window.location.hash = ''; window.location.hash = `#/${link.href.slice(1)}`; } : undefined}
-                  className="nav-link px-4 py-2 text-[13px] font-medium transition-colors duration-300 text-[var(--gray-600)] hover:text-[var(--navy)]"
+                  href={link.href}
+                  className="text-xl font-semibold text-white/80 hover:text-white py-4 border-b border-white/[0.06] transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >{link.name}</a>
               )
             )}
           </div>
-
-          <button
-            className="lg:hidden p-2 -mr-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isMobileMenuOpen}
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-5 h-5 text-[var(--navy)]" />
-            ) : (
-              <Menu className="w-5 h-5 text-[var(--navy)]" />
-            )}
-          </button>
-        </nav>
-      </div>
-
-      {/* Mobile overlay */}
-      <div
-        className={`lg:hidden fixed inset-0 bg-[var(--navy)] transition-all duration-500 ${
-          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        style={{ zIndex: 100 }}
-      >
-        <div className="flex items-center justify-between px-6 py-5">
-          <Link to="/" className="flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
-            <img src={`${base}assets/logo-full.png`} alt="PowerServ" className="h-14 w-auto brightness-0 invert" />
-          </Link>
-          <button onClick={() => setIsMobileMenuOpen(false)} className="p-2" aria-label="Close menu">
-            <X className="w-5 h-5 text-white" />
-          </button>
         </div>
-        <div className="flex flex-col px-6 pt-10">
-          {navLinks.map((link) =>
-            link.isRoute ? (
-              <Link
-                key={link.name}
-                to={link.href}
-                className="text-xl font-semibold text-white/80 hover:text-white py-4 border-b border-white/[0.06] transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >{link.name}</Link>
-            ) : (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-xl font-semibold text-white/80 hover:text-white py-4 border-b border-white/[0.06] transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >{link.name}</a>
-            )
-          )}
-        </div>
-      </div>
-    </header>
+      )}
+    </>
   );
 }
