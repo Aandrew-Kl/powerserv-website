@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Menu, X, Phone, ArrowRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const base = import.meta.env.BASE_URL;
@@ -76,23 +76,6 @@ export default function Navigation() {
                 >{link.name}</a>
               )
             )}
-
-            <div className={`w-px h-5 mx-3 ${solid ? 'bg-[var(--gray-200)]' : 'bg-white/15'}`} />
-
-            <a
-              href="tel:+302109719938"
-              className={`flex items-center gap-1.5 text-[12px] font-medium mr-4 transition-colors duration-300 ${
-                solid ? 'text-[var(--gray-500)]' : 'text-white/50'
-              }`}
-            >
-              <Phone className="w-3 h-3" />
-              +30 210 971 9938
-            </a>
-
-            <a href={isHome ? '#contact' : '/#contact'} className="btn btn-sm bg-[var(--accent)] text-white hover:bg-[var(--accent-light)]">
-              Get in Touch
-              <ArrowRight className="w-3 h-3" />
-            </a>
           </div>
 
           <button
@@ -143,14 +126,6 @@ export default function Navigation() {
               >{link.name}</a>
             )
           )}
-          <a href="tel:+302109719938" className="flex items-center gap-2 text-white/40 text-sm mt-10">
-            <Phone className="w-3.5 h-3.5" />+30 210 971 9938
-          </a>
-          <a
-            href="#contact"
-            className="btn btn-lg bg-[var(--accent)] text-white w-full justify-center mt-6"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >Get in Touch <ArrowRight className="w-4 h-4" /></a>
         </div>
       </div>
     </header>
