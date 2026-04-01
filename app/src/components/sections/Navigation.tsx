@@ -50,27 +50,8 @@ export default function Navigation() {
               />
             </Link>
 
-            <div className="hidden lg:flex items-center gap-0.5">
-              {navLinks.map((link) =>
-                link.isRoute ? (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    className="nav-link px-4 py-2 text-[13px] font-medium transition-colors duration-300 text-[var(--gray-600)] hover:text-[var(--navy)]"
-                  >{link.name}</Link>
-                ) : (
-                  <a
-                    key={link.name}
-                    href={isHome ? link.href : `/#${link.href.slice(1)}`}
-                    onClick={!isHome ? () => { window.location.hash = ''; window.location.hash = `#/${link.href.slice(1)}`; } : undefined}
-                    className="nav-link px-4 py-2 text-[13px] font-medium transition-colors duration-300 text-[var(--gray-600)] hover:text-[var(--navy)]"
-                  >{link.name}</a>
-                )
-              )}
-            </div>
-
             <button
-              className="lg:hidden p-2 -mr-2"
+              className="p-2 -mr-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
@@ -87,7 +68,7 @@ export default function Navigation() {
 
       {/* Mobile overlay - outside header to avoid stacking context issues */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-[999] bg-[#0d1b2a]">
+        <div className="fixed inset-0 z-[999] bg-[#0d1b2a]">
           <div className="flex items-center justify-between px-6 py-4 bg-white">
             <Link to="/" className="flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
               <img src={`${base}assets/logo-full.png`} alt="PowerServ" className="h-14 w-auto" />
