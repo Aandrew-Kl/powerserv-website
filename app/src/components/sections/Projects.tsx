@@ -324,16 +324,22 @@ export default function Projects() {
               </div>
             </div>
 
-            <div className="relative h-[360px] bg-[#eef8f7] md:h-[430px]">
+            <div className="relative h-[360px] bg-[#edf7f6] md:h-[430px]">
               <svg
-                viewBox="0 0 100 90"
+                viewBox="4 5 90 82"
                 role="img"
                 aria-label="Active 2026 project locations across Greece"
                 className="absolute inset-0 h-full w-full"
                 preserveAspectRatio="xMidYMid meet"
               >
-                <rect width="100" height="90" fill="#eef8f7" />
-                <g opacity="0.35" stroke="#c7dbde" strokeWidth="0.12">
+                <defs>
+                  <linearGradient id="greece-map-water" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stopColor="#f3fbfa" />
+                    <stop offset="100%" stopColor="#dff0ef" />
+                  </linearGradient>
+                </defs>
+                <rect width="100" height="90" fill="url(#greece-map-water)" />
+                <g opacity="0.22" stroke="#c7dbde" strokeWidth="0.1">
                   <path d="M0 20H100" />
                   <path d="M0 40H100" />
                   <path d="M0 60H100" />
@@ -343,28 +349,24 @@ export default function Projects() {
                   <path d="M60 0V90" />
                   <path d="M80 0V90" />
                 </g>
-                <g fill="#ffffff" stroke="#8fb0b6" strokeLinejoin="round" strokeWidth="0.26" vectorEffect="non-scaling-stroke">
+                <g fill="#d5e7e5" opacity="0.52" transform="translate(0.28 0.36)">
+                  {greeceMapPaths.map((path) => (
+                    <path key={`shadow-${path}`} d={path} />
+                  ))}
+                </g>
+                <g fill="#fbffff" stroke="#759aa2" strokeLinejoin="round" strokeWidth="0.22" vectorEffect="non-scaling-stroke">
                   {greeceMapPaths.map((path) => (
                     <path key={path} d={path} />
                   ))}
                 </g>
                 <g>
                   {projectedActiveLocations.map((location) => {
-                    const radius = Math.min(3.3, 1.8 + location.projects * 0.16);
+                    const radius = Math.min(2.05, 1.12 + location.projects * 0.08);
 
                     return (
-                      <g key={location.name} transform={`translate(${location.x} ${location.y})`}>
-                        <circle r={radius + 3.5} fill="#22c55e" opacity="0.16" />
-                        <circle r={radius} fill="#20c463" stroke="#ffffff" strokeWidth="0.75" />
-                        {location.projects > 1 && (
-                          <text
-                            y="0.32"
-                            textAnchor="middle"
-                            className="fill-white text-[3.5px] font-extrabold"
-                          >
-                            {location.projects}
-                          </text>
-                        )}
+                      <g key={location.name} data-map-marker="true" transform={`translate(${location.x} ${location.y})`}>
+                        <circle r={radius + 1.9} fill="#22c55e" opacity="0.12" />
+                        <circle r={radius} fill="#20c463" stroke="#ffffff" strokeWidth="0.48" />
                       </g>
                     );
                   })}
@@ -396,7 +398,7 @@ export default function Projects() {
               {activeLocations.map((location) => (
                 <li key={location.name} className="flex items-start justify-between gap-4 border-b border-[var(--gray-100)] pb-3 last:border-b-0 last:pb-0">
                   <div className="flex min-w-0 items-start gap-3">
-                    <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-[#22c55e] ring-4 ring-[#22c55e]/15" />
+                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#22c55e] ring-2 ring-[#22c55e]/15" />
                     <div className="min-w-0">
                       <div className="text-[13px] font-bold leading-snug text-[var(--navy)]">{location.name}</div>
                       <div className="mt-0.5 text-[12px] leading-snug text-[var(--gray-400)]">{location.region}</div>
