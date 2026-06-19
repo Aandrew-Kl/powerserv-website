@@ -231,10 +231,9 @@ const projectedActiveLocations = activeLocations.map((location) => ({
 }));
 
 const mapCssVars = {
-  '--map-sea': '#F4F8FB',
-  '--map-land': '#FCFDFE',
+  '--map-sea': '#EEF4F7',
+  '--map-land': '#FFFFFF',
   '--map-stroke': '#0B2341',
-  '--map-grid': 'rgba(11,35,65,.06)',
   '--marker': '#16A34A',
   '--marker-ring': '#FFFFFF',
 } as CSSProperties;
@@ -337,26 +336,26 @@ export default function Projects() {
                 preserveAspectRatio="xMidYMid meet"
                 shapeRendering="geometricPrecision"
               >
-                <rect width="1000" height="620" fill="var(--map-sea)" />
+                <rect width="100%" height="100%" fill="var(--map-sea)" />
                 <g
                   fill="var(--map-land)"
                   stroke="var(--map-stroke)"
                   strokeLinejoin="round"
-                  strokeWidth="1.25"
+                  strokeWidth="1.1"
                   strokeOpacity="0.9"
                   vectorEffect="non-scaling-stroke"
                 >
                   {greeceMapPaths.map((path) => (
-                    <path key={path} d={path} />
+                    <path key={path} d={path} fillRule="evenodd" clipRule="evenodd" />
                   ))}
                 </g>
                 <g>
                   {projectedActiveLocations.map((location) => {
                     return (
                       <g key={location.name} data-map-marker="true" transform={`translate(${location.x} ${location.y})`}>
-                        <circle r="6.25" fill="none" stroke="var(--map-stroke)" strokeWidth="0.9" strokeOpacity="0.6" vectorEffect="non-scaling-stroke" />
-                        <circle r="6" fill="var(--marker-ring)" />
-                        <circle r="4" fill="var(--marker)" />
+                        <circle r="5.75" fill="none" stroke="var(--map-stroke)" strokeWidth="0.8" strokeOpacity="0.55" vectorEffect="non-scaling-stroke" />
+                        <circle r="5.45" fill="var(--marker-ring)" />
+                        <circle r="3.55" fill="var(--marker)" />
                       </g>
                     );
                   })}
