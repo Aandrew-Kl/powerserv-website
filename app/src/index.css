@@ -74,6 +74,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
   body {
@@ -82,6 +83,7 @@
     background: var(--white);
     line-height: 1.65;
     letter-spacing: -0.01em;
+    overflow-x: hidden;
   }
 
   ::selection {

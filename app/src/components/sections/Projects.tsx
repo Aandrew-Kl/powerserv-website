@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CalendarDays, CheckCircle, ClipboardList } from 'lucide-react';
+import { CalendarDays, CheckCircle, ClipboardList, MapPin } from 'lucide-react';
 
 const base = import.meta.env.BASE_URL;
 
@@ -12,6 +12,14 @@ type Project = {
   status: 'Active';
   sector: Sector;
   scope: string;
+};
+
+type ActiveLocation = {
+  name: string;
+  region: string;
+  projects: number;
+  x: number;
+  y: number;
 };
 
 const sectorImages: Record<Sector, string> = {
@@ -201,6 +209,21 @@ const workStats = [
   { value: '2026', label: 'current year' },
 ];
 
+const activeLocations: ActiveLocation[] = [
+  { name: 'Paros & Antiparos', region: 'Cyclades', projects: 6, x: 61, y: 67 },
+  { name: 'Athens / Attica', region: 'Kallithea, Spata, Airport, Eleonas', projects: 4, x: 49, y: 53 },
+  { name: 'South Aegean islands', region: 'Nisyros, Symi, Karpathos', projects: 3, x: 79, y: 76 },
+  { name: 'Patmos', region: 'Dodecanese', projects: 2, x: 72, y: 55 },
+  { name: 'Tripoli', region: 'Peloponnese', projects: 1, x: 41, y: 63 },
+  { name: 'Chios', region: 'North Aegean', projects: 1, x: 74, y: 38 },
+  { name: 'Veroia', region: 'Central Macedonia', projects: 1, x: 34, y: 20 },
+  { name: 'Kozani', region: 'Western Macedonia', projects: 1, x: 30, y: 18 },
+  { name: 'Domokos', region: 'Central Greece', projects: 1, x: 42, y: 34 },
+  { name: 'Oinofyta', region: 'Boeotia', projects: 1, x: 47, y: 46 },
+];
+
+const mappedProjectReferences = activeLocations.reduce((total, location) => total + location.projects, 0);
+
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('Active Now');
 
@@ -260,6 +283,131 @@ export default function Projects() {
               {filter}
             </button>
           ))}
+        </div>
+
+        <div className="mb-12 grid gap-5 lg:grid-cols-[minmax(0,1fr)_360px]">
+          <div className="reveal overflow-hidden rounded-lg border border-[var(--gray-200)] bg-white">
+            <div className="flex flex-col gap-3 border-b border-[var(--gray-100)] p-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--teal)]">
+                  <MapPin className="h-4 w-4" />
+                  Active Footprint
+                </div>
+                <h3 className="mt-2 text-[22px] font-extrabold leading-tight text-[var(--navy)]">
+                  Live 2026 locations across Greece
+                </h3>
+              </div>
+              <div className="grid grid-cols-2 gap-3 text-right sm:min-w-[210px]">
+                <div>
+                  <div className="text-2xl font-extrabold text-[var(--navy)]">{activeLocations.length}</div>
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--gray-400)]">
+                    mapped areas
+                  </div>
+                </div>
+                <div>
+                  <div className="text-2xl font-extrabold text-[var(--navy)]">{mappedProjectReferences}</div>
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--gray-400)]">
+                    project refs
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative h-[360px] bg-[#e7f4f2] md:h-[430px]">
+              <svg
+                viewBox="0 0 100 90"
+                role="img"
+                aria-labelledby="greece-map-title"
+                className="absolute inset-0 h-full w-full"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <title id="greece-map-title">Active 2026 project locations across Greece</title>
+                <rect width="100" height="90" fill="#e7f4f2" />
+                <path
+                  d="M5 75 C16 68 25 70 36 76 C47 82 62 83 76 79 C86 76 94 78 99 84 L99 90 L5 90 Z"
+                  fill="#d5ece8"
+                  opacity="0.55"
+                />
+                <g fill="#f8fbfb" stroke="#aac3c7" strokeLinejoin="round" strokeWidth="0.75">
+                  <path d="M25 11 C31 8 39 8 45 12 C51 16 56 21 55 28 C55 33 58 36 55 42 C52 47 55 50 51 54 C47 58 47 63 42 65 C38 67 33 63 34 58 C35 54 34 51 31 47 C28 43 31 38 30 34 C29 28 25 25 24 20 C23 16 22 13 25 11 Z" />
+                  <path d="M34 58 C39 55 46 56 49 61 C52 66 48 72 42 74 C36 76 30 71 31 65 C31 62 31 60 34 58 Z" />
+                  <path d="M51 38 C56 42 59 49 55 56 C53 52 53 45 50 40 Z" />
+                  <path d="M53 81 C63 78 77 79 89 82 C80 86 64 87 52 84 Z" />
+                  <path d="M15 33 C18 31 20 33 19 37 C16 38 14 36 15 33 Z" />
+                  <path d="M20 41 C23 39 25 41 24 45 C21 46 19 44 20 41 Z" />
+                  <path d="M63 59 C66 57 69 59 68 63 C65 64 62 62 63 59 Z" />
+                  <path d="M71 36 C75 34 78 37 76 41 C73 42 70 40 71 36 Z" />
+                  <path d="M69 53 C72 52 75 54 74 57 C71 59 68 56 69 53 Z" />
+                  <path d="M78 69 C81 67 84 69 84 72 C81 74 78 72 78 69 Z" />
+                  <path d="M84 75 C87 73 91 75 90 79 C86 80 84 78 84 75 Z" />
+                  <circle cx="57" cy="65" r="1.8" />
+                  <circle cx="60" cy="70" r="1.5" />
+                  <circle cx="66" cy="68" r="1.3" />
+                  <circle cx="74" cy="62" r="1.4" />
+                  <circle cx="78" cy="55" r="1.2" />
+                </g>
+                <g>
+                  {activeLocations.map((location) => {
+                    const radius = Math.min(4.4, 2.6 + location.projects * 0.18);
+
+                    return (
+                      <g key={location.name} transform={`translate(${location.x} ${location.y})`}>
+                        <title>{`${location.name}: ${location.projects} active project reference${location.projects === 1 ? '' : 's'}`}</title>
+                        <circle r={radius + 3.3} fill="#22c55e" opacity="0.18" />
+                        <circle r={radius} fill="#22c55e" stroke="#ffffff" strokeWidth="0.9" />
+                        {location.projects > 1 && (
+                          <text
+                            y="0.35"
+                            textAnchor="middle"
+                            className="fill-white text-[4px] font-extrabold"
+                          >
+                            {location.projects}
+                          </text>
+                        )}
+                      </g>
+                    );
+                  })}
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <aside className="reveal rounded-lg border border-[var(--gray-200)] bg-white p-5 md:p-6">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--navy)] text-white">
+                <MapPin className="h-4 w-4" />
+              </div>
+              <div>
+                <div className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--teal)]">
+                  Location layer
+                </div>
+                <h3 className="mt-1 text-[19px] font-extrabold leading-tight text-[var(--navy)]">
+                  Green dots show active work now
+                </h3>
+              </div>
+            </div>
+
+            <p className="mt-4 text-body-sm text-[var(--text-secondary)]">
+              Grouped from identifiable location mentions in the active 2026 register. Multi-site briefs are shown as one regional marker.
+            </p>
+
+            <ul className="mt-5 space-y-3">
+              {activeLocations.map((location) => (
+                <li key={location.name} className="flex items-start justify-between gap-4 border-b border-[var(--gray-100)] pb-3 last:border-b-0 last:pb-0">
+                  <div className="flex min-w-0 items-start gap-3">
+                    <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-[#22c55e] ring-4 ring-[#22c55e]/15" />
+                    <div className="min-w-0">
+                      <div className="text-[13px] font-bold leading-snug text-[var(--navy)]">{location.name}</div>
+                      <div className="mt-0.5 text-[12px] leading-snug text-[var(--gray-400)]">{location.region}</div>
+                    </div>
+                  </div>
+                  <div className="shrink-0 rounded-md bg-[var(--gray-50)] px-2.5 py-1 text-[11px] font-bold text-[var(--navy)]">
+                    {location.projects}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </aside>
         </div>
 
         <div className="space-y-12">
