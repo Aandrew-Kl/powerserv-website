@@ -1,4 +1,5 @@
 import { ArrowRight, Phone } from 'lucide-react';
+import { scrollToSection } from '@/lib/sectionNavigation';
 
 export default function CTA() {
   return (
@@ -26,10 +27,10 @@ export default function CTA() {
 
           {/* Actions */}
           <div className="reveal flex flex-col sm:flex-row gap-3">
-            <a href="#contact" className="btn btn-lg btn-primary">
+            <button type="button" onClick={() => scrollToSection('contact')} className="btn btn-lg btn-primary">
               Request a Quote
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
             <a
               href="tel:+302109719938"
               className="btn btn-lg btn-outline-white"

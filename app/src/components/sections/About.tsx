@@ -1,5 +1,6 @@
 import { Shield, Target, Lightbulb, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { scrollToSection } from '@/lib/sectionNavigation';
 
 const base = import.meta.env.BASE_URL;
 
@@ -69,9 +70,9 @@ export default function About() {
               We combine deep technical expertise with a hands-on approach. Our team handles the full spectrum of engineering services — from initial feasibility studies and detailed design to project management and on-site supervision.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a href="#services" className="btn btn-md btn-secondary">
+              <button type="button" onClick={() => scrollToSection('services')} className="btn btn-md btn-secondary">
                 View Our Services
-              </a>
+              </button>
               <Link to="/team" className="btn btn-md btn-outline-dark">
                 Meet Our Team
               </Link>

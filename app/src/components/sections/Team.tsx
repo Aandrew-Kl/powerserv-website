@@ -1,5 +1,6 @@
 import { ArrowLeft, Download, GraduationCap } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { scrollToHomeSection } from '@/lib/sectionNavigation';
 
 const base = import.meta.env.BASE_URL;
 
@@ -31,6 +32,9 @@ const team = [
 ];
 
 export default function Team() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Hero Section */}
@@ -109,9 +113,13 @@ export default function Team() {
           <p className="text-white/40 mb-8 max-w-lg mx-auto text-sm">
             Looking for experienced engineering partners for your next project? Get in touch with our team.
           </p>
-          <Link to="/#contact" className="btn btn-md bg-[var(--accent)] text-white hover:bg-[var(--accent-light)]">
+          <button
+            type="button"
+            onClick={() => scrollToHomeSection('contact', location.pathname, navigate)}
+            className="btn btn-md bg-[var(--accent)] text-white hover:bg-[var(--accent-light)]"
+          >
             Get in Touch
-          </Link>
+          </button>
         </div>
       </section>
     </>

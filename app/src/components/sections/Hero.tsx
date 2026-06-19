@@ -1,4 +1,5 @@
 import { ArrowRight, ChevronDown } from 'lucide-react';
+import { scrollToSection } from '@/lib/sectionNavigation';
 
 const base = import.meta.env.BASE_URL;
 
@@ -59,13 +60,13 @@ export default function Hero() {
             className="flex flex-wrap gap-4 animate-fade-in-up"
             style={{ animationDelay: '0.8s', animationFillMode: 'both' }}
           >
-            <a href="#contact" className="btn btn-lg btn-primary">
+            <button type="button" onClick={() => scrollToSection('contact')} className="btn btn-lg btn-primary">
               Request a Quote
               <ArrowRight className="w-4 h-4" />
-            </a>
-            <a href="#services" className="btn btn-lg btn-outline-white">
+            </button>
+            <button type="button" onClick={() => scrollToSection('services')} className="btn btn-lg btn-outline-white">
               Explore Services
-            </a>
+            </button>
           </div>
 
           {/* Key metrics */}
@@ -89,14 +90,15 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-fade-in" style={{ animationDelay: '1.5s', animationFillMode: 'both' }}>
-        <a
-          href="#about"
+        <button
+          type="button"
+          onClick={() => scrollToSection('about')}
           className="flex flex-col items-center gap-2 text-white/25 hover:text-white/50 transition-colors"
           aria-label="Scroll down"
         >
           <span className="text-[9px] uppercase tracking-[0.3em]">Scroll</span>
           <ChevronDown className="w-3.5 h-3.5 animate-bounce" />
-        </a>
+        </button>
       </div>
     </section>
   );

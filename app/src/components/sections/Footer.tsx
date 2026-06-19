@@ -7,6 +7,8 @@ import {
   ArrowUp,
   FileCheck,
 } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { scrollToHomeSection } from '@/lib/sectionNavigation';
 
 const serviceLinks = [
   'Budget Estimation & Feasibility',
@@ -28,8 +30,15 @@ const sectorLinks = [
 const base = import.meta.env.BASE_URL;
 
 export default function Footer() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSectionClick = (sectionId: string) => {
+    scrollToHomeSection(sectionId, location.pathname, navigate);
   };
 
   return (
@@ -66,9 +75,13 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {serviceLinks.map((link) => (
                 <li key={link}>
-                  <a href="#services" className="text-[13px] text-[var(--gray-500)] hover:text-[var(--teal)] transition-colors duration-300">
+                  <button
+                    type="button"
+                    onClick={() => handleSectionClick('services')}
+                    className="text-left text-[13px] text-[var(--gray-500)] hover:text-[var(--teal)] transition-colors duration-300"
+                  >
                     {link}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -80,9 +93,13 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {sectorLinks.map((link) => (
                 <li key={link}>
-                  <a href="#about" className="text-[13px] text-[var(--gray-500)] hover:text-[var(--teal)] transition-colors duration-300">
+                  <button
+                    type="button"
+                    onClick={() => handleSectionClick('about')}
+                    className="text-left text-[13px] text-[var(--gray-500)] hover:text-[var(--teal)] transition-colors duration-300"
+                  >
                     {link}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>

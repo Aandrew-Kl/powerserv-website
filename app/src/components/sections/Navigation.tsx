@@ -1,23 +1,34 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { scrollToHomeSection } from '@/lib/sectionNavigation';
 
 const base = import.meta.env.BASE_URL;
 
-const navLinks = [
-  { name: 'About', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Projects', href: '#projects' },
+type NavLink =
+  | { name: string; sectionId: string; isRoute?: false }
+  | { name: string; href: string; isRoute: true };
+
+const navLinks: NavLink[] = [
+  { name: 'About', sectionId: 'about' },
+  { name: 'Services', sectionId: 'services' },
+  { name: 'Projects', sectionId: 'projects' },
   { name: 'Team', href: '/team', isRoute: true },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Contact', sectionId: 'contact' },
 ];
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === '/';
   const solid = isScrolled || !isHome;
+
+  const handleSectionClick = (sectionId: string) => {
+    setIsMobileMenuOpen(false);
+    scrollToHomeSection(sectionId, location.pathname, navigate);
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 60);
@@ -87,12 +98,12 @@ export default function Navigation() {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >{link.name}</Link>
               ) : (
-                <a
+                <button
+                  type="button"
                   key={link.name}
-                  href={link.href}
-                  className="text-xl font-semibold text-white/80 hover:text-white py-4 border-b border-white/[0.06] transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >{link.name}</a>
+                  className="text-left text-xl font-semibold text-white/80 hover:text-white py-4 border-b border-white/[0.06] transition-colors"
+                  onClick={() => handleSectionClick(link.sectionId)}
+                >{link.name}</button>
               )
             )}
           </div>
