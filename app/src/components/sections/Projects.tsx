@@ -324,9 +324,9 @@ export default function Projects() {
               </div>
             </div>
 
-            <div className="relative h-[360px] bg-[#edf7f6] md:h-[430px]">
+            <div className="relative h-[380px] bg-[#edf7f6] md:h-[470px]">
               <svg
-                viewBox="4 5 90 82"
+                viewBox="5 6 84 80"
                 role="img"
                 aria-label="Active 2026 project locations across Greece"
                 className="absolute inset-0 h-full w-full"
