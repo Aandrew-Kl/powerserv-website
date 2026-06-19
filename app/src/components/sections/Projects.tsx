@@ -1,13 +1,25 @@
 import { useState } from 'react';
 import { CalendarDays, CheckCircle, ClipboardList } from 'lucide-react';
 
+const base = import.meta.env.BASE_URL;
+
+type Sector = 'Building' | 'Energy' | 'Environmental' | 'Industrial' | 'Infrastructure';
+
 type Project = {
   client: string;
   quarter: 'Q1 2026' | 'Q2 2026';
   year: '2026';
   status: 'Active';
-  sector: 'Building' | 'Energy' | 'Environmental' | 'Industrial' | 'Infrastructure';
+  sector: Sector;
   scope: string;
+};
+
+const sectorImages: Record<Sector, string> = {
+  Building: `${base}assets/projects/project-building.jpg`,
+  Energy: `${base}assets/projects/project-energy.jpg`,
+  Environmental: `${base}assets/projects/project-environmental.jpg`,
+  Industrial: `${base}assets/projects/project-industrial.jpg`,
+  Infrastructure: `${base}assets/projects/project-infrastructure.jpg`,
 };
 
 const projects: Project[] = [
@@ -274,37 +286,47 @@ export default function Projects() {
                 {quarterProjects.map((project, i) => (
                   <article
                     key={`${project.quarter}-${i}-${project.client}`}
-                    className={`reveal delay-${(i % 3 + 1) * 100} project-card bg-white rounded-lg border border-[var(--gray-100)] p-5`}
+                    className={`reveal delay-${(i % 3 + 1) * 100} project-card group overflow-hidden bg-white rounded-lg border border-[var(--gray-100)]`}
                   >
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                      <div>
-                        <div className="mb-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--teal)]">
-                          {project.quarter}
-                        </div>
-                        <h4 className="text-[17px] font-bold leading-tight text-[var(--navy)]">
-                          {project.client}
-                        </h4>
+                    <div className="relative h-36 overflow-hidden bg-[var(--navy)]">
+                      <img
+                        src={sectorImages[project.sector]}
+                        alt={`${project.sector} engineering reference`}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--navy)]/70 via-[var(--navy)]/15 to-transparent" />
+                      <div className="absolute left-4 top-4 rounded bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--navy)]">
+                        {project.sector}
                       </div>
-                      <div className="flex flex-wrap gap-2 sm:justify-end">
-                        <span className="rounded bg-[var(--navy)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">
-                          {project.status}
-                        </span>
-                        <span className="rounded bg-[var(--gray-50)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--gray-600)]">
-                          {project.sector}
-                        </span>
+                      <div className="absolute right-4 top-4 rounded bg-[var(--teal)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">
+                        {project.status}
                       </div>
                     </div>
 
-                    <p className="mt-4 text-body-sm text-[var(--text-secondary)]">
-                      {project.scope}
-                    </p>
-
-                    <div className="mt-5 flex items-center justify-between gap-4 border-t border-[var(--gray-100)] pt-4">
-                      <div className="flex items-center gap-2 text-[12px] font-semibold text-[var(--navy)]">
-                        <CheckCircle className="h-4 w-4 text-[var(--teal)]" />
-                        Currently active
+                    <div className="p-5">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                        <div>
+                          <div className="mb-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--teal)]">
+                            {project.quarter}
+                          </div>
+                          <h4 className="text-[17px] font-bold leading-tight text-[var(--navy)]">
+                            {project.client}
+                          </h4>
+                        </div>
                       </div>
-                      <ClipboardList className="h-4 w-4 text-[var(--gray-300)]" />
+
+                      <p className="mt-4 text-body-sm text-[var(--text-secondary)]">
+                        {project.scope}
+                      </p>
+
+                      <div className="mt-5 flex items-center justify-between gap-4 border-t border-[var(--gray-100)] pt-4">
+                        <div className="flex items-center gap-2 text-[12px] font-semibold text-[var(--navy)]">
+                          <CheckCircle className="h-4 w-4 text-[var(--teal)]" />
+                          Currently active
+                        </div>
+                        <ClipboardList className="h-4 w-4 text-[var(--gray-300)]" />
+                      </div>
                     </div>
                   </article>
                 ))}
