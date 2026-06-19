@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CalendarDays, CheckCircle, ClipboardList, MapPin } from 'lucide-react';
+import { greeceMapBounds, greeceMapPaths } from '../../data/greeceMapPaths';
 
 const base = import.meta.env.BASE_URL;
 
@@ -18,8 +19,8 @@ type ActiveLocation = {
   name: string;
   region: string;
   projects: number;
-  x: number;
-  y: number;
+  lon: number;
+  lat: number;
 };
 
 const sectorImages: Record<Sector, string> = {
@@ -210,19 +211,29 @@ const workStats = [
 ];
 
 const activeLocations: ActiveLocation[] = [
-  { name: 'Paros & Antiparos', region: 'Cyclades', projects: 6, x: 61, y: 67 },
-  { name: 'Athens / Attica', region: 'Kallithea, Spata, Airport, Eleonas', projects: 4, x: 49, y: 53 },
-  { name: 'South Aegean islands', region: 'Nisyros, Symi, Karpathos', projects: 3, x: 79, y: 76 },
-  { name: 'Patmos', region: 'Dodecanese', projects: 2, x: 72, y: 55 },
-  { name: 'Tripoli', region: 'Peloponnese', projects: 1, x: 41, y: 63 },
-  { name: 'Chios', region: 'North Aegean', projects: 1, x: 74, y: 38 },
-  { name: 'Veroia', region: 'Central Macedonia', projects: 1, x: 34, y: 20 },
-  { name: 'Kozani', region: 'Western Macedonia', projects: 1, x: 30, y: 18 },
-  { name: 'Domokos', region: 'Central Greece', projects: 1, x: 42, y: 34 },
-  { name: 'Oinofyta', region: 'Boeotia', projects: 1, x: 47, y: 46 },
+  { name: 'Paros & Antiparos', region: 'Cyclades', projects: 6, lon: 25.15, lat: 37.08 },
+  { name: 'Athens / Attica', region: 'Kallithea, Spata, Airport, Eleonas', projects: 4, lon: 23.73, lat: 37.98 },
+  { name: 'South Aegean islands', region: 'Nisyros, Symi, Karpathos', projects: 3, lon: 27.4, lat: 36.2 },
+  { name: 'Patmos', region: 'Dodecanese', projects: 2, lon: 26.55, lat: 37.31 },
+  { name: 'Tripoli', region: 'Peloponnese', projects: 1, lon: 22.37, lat: 37.51 },
+  { name: 'Chios', region: 'North Aegean', projects: 1, lon: 26.14, lat: 38.37 },
+  { name: 'Veroia', region: 'Central Macedonia', projects: 1, lon: 22.2, lat: 40.52 },
+  { name: 'Kozani', region: 'Western Macedonia', projects: 1, lon: 21.79, lat: 40.3 },
+  { name: 'Domokos', region: 'Central Greece', projects: 1, lon: 22.3, lat: 39.13 },
+  { name: 'Oinofyta', region: 'Boeotia', projects: 1, lon: 23.64, lat: 38.31 },
 ];
 
 const mappedProjectReferences = activeLocations.reduce((total, location) => total + location.projects, 0);
+
+const projectMapPoint = (location: ActiveLocation) => ({
+  x: ((location.lon - greeceMapBounds.minLon) / (greeceMapBounds.maxLon - greeceMapBounds.minLon)) * 100,
+  y: ((greeceMapBounds.maxLat - location.lat) / (greeceMapBounds.maxLat - greeceMapBounds.minLat)) * 90,
+});
+
+const projectedActiveLocations = activeLocations.map((location) => ({
+  ...location,
+  ...projectMapPoint(location),
+}));
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('Active Now');
@@ -313,53 +324,43 @@ export default function Projects() {
               </div>
             </div>
 
-            <div className="relative h-[360px] bg-[#e7f4f2] md:h-[430px]">
+            <div className="relative h-[360px] bg-[#eef8f7] md:h-[430px]">
               <svg
                 viewBox="0 0 100 90"
                 role="img"
-                aria-labelledby="greece-map-title"
+                aria-label="Active 2026 project locations across Greece"
                 className="absolute inset-0 h-full w-full"
                 preserveAspectRatio="xMidYMid meet"
               >
-                <title id="greece-map-title">Active 2026 project locations across Greece</title>
-                <rect width="100" height="90" fill="#e7f4f2" />
-                <path
-                  d="M5 75 C16 68 25 70 36 76 C47 82 62 83 76 79 C86 76 94 78 99 84 L99 90 L5 90 Z"
-                  fill="#d5ece8"
-                  opacity="0.55"
-                />
-                <g fill="#f8fbfb" stroke="#aac3c7" strokeLinejoin="round" strokeWidth="0.75">
-                  <path d="M25 11 C31 8 39 8 45 12 C51 16 56 21 55 28 C55 33 58 36 55 42 C52 47 55 50 51 54 C47 58 47 63 42 65 C38 67 33 63 34 58 C35 54 34 51 31 47 C28 43 31 38 30 34 C29 28 25 25 24 20 C23 16 22 13 25 11 Z" />
-                  <path d="M34 58 C39 55 46 56 49 61 C52 66 48 72 42 74 C36 76 30 71 31 65 C31 62 31 60 34 58 Z" />
-                  <path d="M51 38 C56 42 59 49 55 56 C53 52 53 45 50 40 Z" />
-                  <path d="M53 81 C63 78 77 79 89 82 C80 86 64 87 52 84 Z" />
-                  <path d="M15 33 C18 31 20 33 19 37 C16 38 14 36 15 33 Z" />
-                  <path d="M20 41 C23 39 25 41 24 45 C21 46 19 44 20 41 Z" />
-                  <path d="M63 59 C66 57 69 59 68 63 C65 64 62 62 63 59 Z" />
-                  <path d="M71 36 C75 34 78 37 76 41 C73 42 70 40 71 36 Z" />
-                  <path d="M69 53 C72 52 75 54 74 57 C71 59 68 56 69 53 Z" />
-                  <path d="M78 69 C81 67 84 69 84 72 C81 74 78 72 78 69 Z" />
-                  <path d="M84 75 C87 73 91 75 90 79 C86 80 84 78 84 75 Z" />
-                  <circle cx="57" cy="65" r="1.8" />
-                  <circle cx="60" cy="70" r="1.5" />
-                  <circle cx="66" cy="68" r="1.3" />
-                  <circle cx="74" cy="62" r="1.4" />
-                  <circle cx="78" cy="55" r="1.2" />
+                <rect width="100" height="90" fill="#eef8f7" />
+                <g opacity="0.35" stroke="#c7dbde" strokeWidth="0.12">
+                  <path d="M0 20H100" />
+                  <path d="M0 40H100" />
+                  <path d="M0 60H100" />
+                  <path d="M0 80H100" />
+                  <path d="M20 0V90" />
+                  <path d="M40 0V90" />
+                  <path d="M60 0V90" />
+                  <path d="M80 0V90" />
+                </g>
+                <g fill="#ffffff" stroke="#8fb0b6" strokeLinejoin="round" strokeWidth="0.26" vectorEffect="non-scaling-stroke">
+                  {greeceMapPaths.map((path) => (
+                    <path key={path} d={path} />
+                  ))}
                 </g>
                 <g>
-                  {activeLocations.map((location) => {
-                    const radius = Math.min(4.4, 2.6 + location.projects * 0.18);
+                  {projectedActiveLocations.map((location) => {
+                    const radius = Math.min(3.3, 1.8 + location.projects * 0.16);
 
                     return (
                       <g key={location.name} transform={`translate(${location.x} ${location.y})`}>
-                        <title>{`${location.name}: ${location.projects} active project reference${location.projects === 1 ? '' : 's'}`}</title>
-                        <circle r={radius + 3.3} fill="#22c55e" opacity="0.18" />
-                        <circle r={radius} fill="#22c55e" stroke="#ffffff" strokeWidth="0.9" />
+                        <circle r={radius + 3.5} fill="#22c55e" opacity="0.16" />
+                        <circle r={radius} fill="#20c463" stroke="#ffffff" strokeWidth="0.75" />
                         {location.projects > 1 && (
                           <text
-                            y="0.35"
+                            y="0.32"
                             textAnchor="middle"
-                            className="fill-white text-[4px] font-extrabold"
+                            className="fill-white text-[3.5px] font-extrabold"
                           >
                             {location.projects}
                           </text>
