@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { CalendarDays, CheckCircle, ClipboardList, MapPin } from 'lucide-react';
-import { greeceMapBounds, greeceMapPaths } from '../../data/greeceMapPaths';
+import { greeceMapPaths, greeceMapPoints, greeceMapViewBox } from '../../data/greeceMapPaths';
 
 const base = import.meta.env.BASE_URL;
 
@@ -225,15 +225,19 @@ const activeLocations: ActiveLocation[] = [
 
 const mappedProjectReferences = activeLocations.reduce((total, location) => total + location.projects, 0);
 
-const projectMapPoint = (location: ActiveLocation) => ({
-  x: ((location.lon - greeceMapBounds.minLon) / (greeceMapBounds.maxLon - greeceMapBounds.minLon)) * 100,
-  y: ((greeceMapBounds.maxLat - location.lat) / (greeceMapBounds.maxLat - greeceMapBounds.minLat)) * 90,
-});
-
 const projectedActiveLocations = activeLocations.map((location) => ({
   ...location,
-  ...projectMapPoint(location),
+  ...greeceMapPoints[location.name as keyof typeof greeceMapPoints],
 }));
+
+const mapCssVars = {
+  '--map-sea': '#F4F8FB',
+  '--map-land': '#FCFDFE',
+  '--map-stroke': '#0B2341',
+  '--map-grid': 'rgba(11,35,65,.06)',
+  '--marker': '#16A34A',
+  '--marker-ring': '#FFFFFF',
+} as CSSProperties;
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('Active Now');
@@ -324,49 +328,35 @@ export default function Projects() {
               </div>
             </div>
 
-            <div className="relative h-[380px] bg-[#edf7f6] md:h-[470px]">
+            <div className="relative h-[380px] bg-[var(--map-sea)] md:h-[470px]" style={mapCssVars}>
               <svg
-                viewBox="5 6 84 80"
+                viewBox={greeceMapViewBox}
                 role="img"
                 aria-label="Active 2026 project locations across Greece"
                 className="absolute inset-0 h-full w-full"
                 preserveAspectRatio="xMidYMid meet"
+                shapeRendering="geometricPrecision"
               >
-                <defs>
-                  <linearGradient id="greece-map-water" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#f3fbfa" />
-                    <stop offset="100%" stopColor="#dff0ef" />
-                  </linearGradient>
-                </defs>
-                <rect width="100" height="90" fill="url(#greece-map-water)" />
-                <g opacity="0.22" stroke="#c7dbde" strokeWidth="0.1">
-                  <path d="M0 20H100" />
-                  <path d="M0 40H100" />
-                  <path d="M0 60H100" />
-                  <path d="M0 80H100" />
-                  <path d="M20 0V90" />
-                  <path d="M40 0V90" />
-                  <path d="M60 0V90" />
-                  <path d="M80 0V90" />
-                </g>
-                <g fill="#d5e7e5" opacity="0.52" transform="translate(0.28 0.36)">
-                  {greeceMapPaths.map((path) => (
-                    <path key={`shadow-${path}`} d={path} />
-                  ))}
-                </g>
-                <g fill="#fbffff" stroke="#759aa2" strokeLinejoin="round" strokeWidth="0.22" vectorEffect="non-scaling-stroke">
+                <rect width="1000" height="620" fill="var(--map-sea)" />
+                <g
+                  fill="var(--map-land)"
+                  stroke="var(--map-stroke)"
+                  strokeLinejoin="round"
+                  strokeWidth="1.25"
+                  strokeOpacity="0.9"
+                  vectorEffect="non-scaling-stroke"
+                >
                   {greeceMapPaths.map((path) => (
                     <path key={path} d={path} />
                   ))}
                 </g>
                 <g>
                   {projectedActiveLocations.map((location) => {
-                    const radius = Math.min(2.05, 1.12 + location.projects * 0.08);
-
                     return (
                       <g key={location.name} data-map-marker="true" transform={`translate(${location.x} ${location.y})`}>
-                        <circle r={radius + 1.9} fill="#22c55e" opacity="0.12" />
-                        <circle r={radius} fill="#20c463" stroke="#ffffff" strokeWidth="0.48" />
+                        <circle r="6.25" fill="none" stroke="var(--map-stroke)" strokeWidth="0.9" strokeOpacity="0.6" vectorEffect="non-scaling-stroke" />
+                        <circle r="6" fill="var(--marker-ring)" />
+                        <circle r="4" fill="var(--marker)" />
                       </g>
                     );
                   })}
@@ -398,7 +388,7 @@ export default function Projects() {
               {activeLocations.map((location) => (
                 <li key={location.name} className="flex items-start justify-between gap-4 border-b border-[var(--gray-100)] pb-3 last:border-b-0 last:pb-0">
                   <div className="flex min-w-0 items-start gap-3">
-                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#22c55e] ring-2 ring-[#22c55e]/15" />
+                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#16A34A] ring-2 ring-white shadow-[0_0_0_1px_rgba(11,35,65,0.35)]" />
                     <div className="min-w-0">
                       <div className="text-[13px] font-bold leading-snug text-[var(--navy)]">{location.name}</div>
                       <div className="mt-0.5 text-[12px] leading-snug text-[var(--gray-400)]">{location.region}</div>
