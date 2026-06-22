@@ -51,7 +51,9 @@ export default function Footer() {
           {/* Column 1: Company */}
           <div className="lg:col-span-1">
             <div className="mb-6">
-              <img src={`${base}assets/logo-full.png`} alt="PowerServ Engineering Company" className="h-10 w-auto brightness-0 invert" />
+              <div className="inline-flex rounded-md bg-white px-4 py-3 shadow-sm">
+                <img src={`${base}assets/logo-full.png`} alt="PowerServ Engineering Company" className="h-12 w-auto" />
+              </div>
             </div>
             <p className="text-sm text-[var(--gray-500)] leading-relaxed mb-6">
               Integrated engineering solutions for the marine, energy, and industrial sectors. From concept to commissioning.
