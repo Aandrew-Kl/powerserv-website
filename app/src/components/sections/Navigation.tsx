@@ -19,8 +19,8 @@ const navLinks: NavLink[] = [
 
 const headerContacts = [
   {
-    label: '+30 210 971 9938',
-    href: 'tel:+302109719938',
+    label: '210 71 04 824',
+    href: 'tel:+302107104824',
     icon: Phone,
     ariaLabel: 'Call PowerServ',
   },

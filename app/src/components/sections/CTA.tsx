@@ -32,7 +32,7 @@ export default function CTA() {
               <ArrowRight className="w-4 h-4" />
             </button>
             <a
-              href="tel:+302109719938"
+              href="tel:+302107104824"
               className="btn btn-lg btn-outline-white"
             >
               <Phone className="w-4 h-4" />
