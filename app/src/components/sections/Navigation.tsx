@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Mail, Menu, Phone, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { scrollToHomeSection } from '@/lib/sectionNavigation';
 
@@ -15,6 +15,21 @@ const navLinks: NavLink[] = [
   { name: 'Projects', sectionId: 'projects' },
   { name: 'Team', href: '/team', isRoute: true },
   { name: 'Contact', sectionId: 'contact' },
+];
+
+const headerContacts = [
+  {
+    label: '+30 210 971 9938',
+    href: 'tel:+302109719938',
+    icon: Phone,
+    ariaLabel: 'Call PowerServ',
+  },
+  {
+    label: 'info@powerserv.gr',
+    href: 'mailto:info@powerserv.gr',
+    icon: Mail,
+    ariaLabel: 'Email PowerServ',
+  },
 ];
 
 export default function Navigation() {
@@ -52,17 +67,33 @@ export default function Navigation() {
         role="banner"
       >
         <div className="container-wide">
-          <nav className="flex items-center justify-between" aria-label="Main navigation">
-            <Link to="/" className="flex items-center" aria-label="PowerServ - Home">
+          <nav className="flex items-center justify-between gap-3" aria-label="Main navigation">
+            <Link to="/" className="flex shrink-0 items-center" aria-label="PowerServ - Home">
               <img
                 src={`${base}assets/logo-full.png`}
                 alt="PowerServ Engineering Company"
-                className="h-14 w-auto transition-all duration-300"
+                className="h-10 w-auto transition-all duration-300 sm:h-12 lg:h-14"
               />
             </Link>
 
+            <div className="ml-auto flex items-center gap-1.5 sm:gap-2" aria-label="PowerServ contact details">
+              {headerContacts.map(({ label, href, icon: Icon, ariaLabel }) => (
+                <a
+                  key={href}
+                  href={href}
+                  aria-label={ariaLabel}
+                  className={`group inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border text-[var(--navy)] transition-all duration-300 hover:border-[var(--teal)] hover:text-[var(--teal)] lg:h-auto lg:w-auto lg:gap-2 lg:px-3 lg:py-2 ${
+                    solid ? 'border-[var(--gray-200)] bg-[var(--gray-50)]' : 'border-white/70 bg-white/65'
+                  }`}
+                >
+                  <Icon className="h-4 w-4 shrink-0" />
+                  <span className="hidden text-[12px] font-bold leading-none lg:inline">{label}</span>
+                </a>
+              ))}
+            </div>
+
             <button
-              className="p-2 -mr-2"
+              className="shrink-0 p-2 -mr-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
