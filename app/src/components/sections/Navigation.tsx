@@ -82,12 +82,12 @@ export default function Navigation() {
                   key={href}
                   href={href}
                   aria-label={ariaLabel}
-                  className={`group inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border text-[var(--navy)] transition-all duration-300 hover:border-[var(--teal)] hover:text-[var(--teal)] lg:h-auto lg:w-auto lg:gap-2 lg:px-3 lg:py-2 ${
-                    solid ? 'border-[var(--gray-200)] bg-[var(--gray-50)]' : 'border-white/70 bg-white/65'
-                  }`}
+                  className="group inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[var(--navy)] transition-all duration-300 hover:bg-[var(--teal)]/10 hover:text-[var(--teal)] lg:h-auto lg:w-auto lg:gap-2 lg:rounded-md lg:px-2.5 lg:py-2"
                 >
-                  <Icon className="h-4 w-4 shrink-0" />
-                  <span className="hidden text-[12px] font-bold leading-none lg:inline">{label}</span>
+                  <Icon className="h-4 w-4 shrink-0 text-[var(--teal)]" />
+                  <span className="hidden text-[12px] font-bold leading-none text-[var(--navy)] transition-colors duration-300 group-hover:text-[var(--teal)] lg:inline">
+                    {label}
+                  </span>
                 </a>
               ))}
             </div>
