@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Mail, Menu, Phone, X } from 'lucide-react';
+import { Mail, MapPin, Menu, Phone, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { scrollToHomeSection } from '@/lib/sectionNavigation';
 
@@ -19,10 +19,19 @@ const navLinks: NavLink[] = [
 
 const headerContacts = [
   {
+    label: '39 Kanari str, Dafni',
+    href: 'https://www.google.com/maps/search/?api=1&query=39%20Kanari%20str%2C%20Dafni%20172%2035%2C%20Attiki%2C%20Greece',
+    icon: MapPin,
+    ariaLabel: 'View PowerServ address',
+    external: true,
+    hideOnTiny: true,
+  },
+  {
     label: '210 71 04 824',
     href: 'tel:+302107104824',
     icon: Phone,
     ariaLabel: 'Call PowerServ',
+    featured: true,
   },
   {
     label: 'info@powerserv.gr',
@@ -67,25 +76,31 @@ export default function Navigation() {
         role="banner"
       >
         <div className="container-wide">
-          <nav className="flex items-center justify-between gap-3" aria-label="Main navigation">
+          <nav className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 sm:gap-3" aria-label="Main navigation">
             <Link to="/" className="flex shrink-0 items-center" aria-label="PowerServ - Home">
               <img
                 src={`${base}assets/logo-full.png`}
                 alt="PowerServ Engineering Company"
-                className="h-10 w-auto transition-all duration-300 sm:h-12 lg:h-14"
+                className="h-9 w-auto transition-all duration-300 sm:h-12 lg:h-14"
               />
             </Link>
 
-            <div className="ml-auto flex items-center gap-1.5 sm:gap-2" aria-label="PowerServ contact details">
-              {headerContacts.map(({ label, href, icon: Icon, ariaLabel }) => (
+            <div className="flex min-w-0 items-center justify-end gap-1 sm:gap-2 lg:justify-center" aria-label="PowerServ contact details">
+              {headerContacts.map(({ label, href, icon: Icon, ariaLabel, external, featured, hideOnTiny }) => (
                 <a
                   key={href}
                   href={href}
                   aria-label={ariaLabel}
-                  className="group inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[var(--navy)] transition-all duration-300 hover:bg-[var(--teal)]/10 hover:text-[var(--teal)] lg:h-auto lg:w-auto lg:gap-2 lg:rounded-md lg:px-2.5 lg:py-2"
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
+                  className={`group inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[var(--navy)] transition-all duration-300 hover:bg-[var(--teal)]/10 hover:text-[var(--teal)] sm:h-9 sm:w-9 lg:h-auto lg:w-auto lg:gap-2 lg:rounded-md lg:py-2 ${
+                    featured ? 'lg:px-3.5' : 'lg:px-2.5'
+                  } ${hideOnTiny ? 'max-[340px]:hidden' : ''}`}
                 >
-                  <Icon className="h-4 w-4 shrink-0 text-[var(--teal)]" />
-                  <span className="hidden text-[12px] font-bold leading-none text-[var(--navy)] transition-colors duration-300 group-hover:text-[var(--teal)] lg:inline">
+                  <Icon className={`${featured ? 'h-[18px] w-[18px]' : 'h-4 w-4'} shrink-0 text-[var(--teal)]`} />
+                  <span className={`hidden font-bold leading-none text-[var(--navy)] transition-colors duration-300 group-hover:text-[var(--teal)] lg:inline ${
+                    featured ? 'text-[13px]' : 'text-[12px]'
+                  }`}>
                     {label}
                   </span>
                 </a>
