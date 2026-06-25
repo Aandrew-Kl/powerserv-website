@@ -41,7 +41,7 @@ export default function Hero() {
             className="text-display text-white mb-6 animate-fade-in-up"
             style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
           >
-            Engineering Precision
+            Engineering Precision{' '}
             <br />
             <span className="text-[var(--teal-light)]">for Critical Industrial Applications</span>
           </h1>
