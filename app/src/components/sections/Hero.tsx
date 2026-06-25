@@ -33,7 +33,7 @@ export default function Hero() {
           {/* Overline */}
           <div className="flex items-center gap-3 mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
             <div className="w-8 h-px bg-[var(--teal)]" />
-            <span className="text-overline text-[var(--teal)]">Engineering Excellence Since 2008</span>
+            <span className="text-overline text-[var(--teal)]">Driven by Passion for Innovation and Leadership Since 2014</span>
           </div>
 
           {/* Headline */}
@@ -41,9 +41,9 @@ export default function Hero() {
             className="text-display text-white mb-6 animate-fade-in-up"
             style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
           >
-            Precision Engineering
+            Engineering Precision
             <br />
-            <span className="text-[var(--teal-light)]">for Critical Industries</span>
+            <span className="text-[var(--teal-light)]">for Critical Industrial Applications</span>
           </h1>
 
           {/* Subtitle */}
