@@ -27,6 +27,19 @@ const sectorLinks = [
   'Industrial Automation',
 ];
 
+const officeAddresses = [
+  {
+    label: 'Registered office address',
+    href: 'https://maps.app.goo.gl/aeYN2DAvD5uYz8QZ9',
+    lines: ['Ploutarchou 35', 'Dafni 172 35, Attiki, Greece'],
+  },
+  {
+    label: 'Branch office address',
+    href: 'https://maps.app.goo.gl/UArLfS9oCFDtmp8e9',
+    lines: ['39 Kanari str, Dafni', 'PO 172 35, Attiki, Greece'],
+  },
+];
+
 const base = import.meta.env.BASE_URL;
 
 export default function Footer() {
@@ -111,13 +124,27 @@ export default function Footer() {
           <div>
             <h3 className="text-[11px] font-semibold text-white/60 uppercase tracking-[0.15em] mb-5">Contact</h3>
             <ul className="space-y-3.5">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-3.5 h-3.5 text-[var(--teal)] flex-shrink-0 mt-0.5" />
-                <span className="text-[13px] text-[var(--gray-500)]">
-                  39 Kanari str, Dafni<br />
-                  PO 172 35, Attiki, Greece
-                </span>
-              </li>
+              {officeAddresses.map((office) => (
+                <li key={office.href} className="flex items-start gap-3">
+                  <MapPin className="w-3.5 h-3.5 text-[var(--teal)] flex-shrink-0 mt-0.5" />
+                  <a
+                    href={office.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group text-[13px] leading-relaxed text-[var(--gray-500)] transition-colors hover:text-white"
+                    aria-label={`Open ${office.label} in Google Maps`}
+                  >
+                    <span className="block text-[11px] font-semibold uppercase tracking-[0.13em] text-white/55 transition-colors group-hover:text-[var(--teal)]">
+                      {office.label}
+                    </span>
+                    {office.lines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </a>
+                </li>
+              ))}
               <li className="flex items-center gap-3">
                 <Phone className="w-3.5 h-3.5 text-[var(--teal)] flex-shrink-0" />
                 <a href="tel:+302107104824" className="text-[13px] text-[var(--gray-500)] hover:text-white transition-colors">
